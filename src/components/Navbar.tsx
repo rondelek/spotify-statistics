@@ -36,7 +36,7 @@ export default function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" color='primary'>
+    <AppBar position="sticky" color='primary'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <GraphicEqIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

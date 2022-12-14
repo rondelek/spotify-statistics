@@ -1,12 +1,10 @@
 import Box from '@mui/material/Box';
 import ArtistsWeek from '../components/ArtistsWeek';
 import FullWidthTabs from '../components/FullWidthTabs';
+import Top from '../layouts/Top';
 
 export default function Artists() {
     return (
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <h2>Top artists</h2>
-            <FullWidthTabs tab1={<ArtistsWeek />} tab2={<ArtistsWeek />} tab3={<ArtistsWeek />}/>
-        </Box>
+        <Top name={'artists'} tab1={<ArtistsWeek />} tab2={<ArtistsWeek />} tab3={<ArtistsWeek />}/>
     )
 }

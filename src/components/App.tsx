@@ -7,6 +7,10 @@ import Navbar from './Navbar';
 import { lazy } from 'react';
 
 const Artists = lazy(() => import('../pages/Artists'))
+const Tracks = lazy(() => import('../pages/Tracks'))
+const Genres = lazy(() => import('../pages/Genres'))
+const Podcasts = lazy(() => import('../pages/Podcasts'))
+
 
 const theme = createTheme({
   palette: {
@@ -39,6 +43,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/artists' element={<Artists />}/>
+          <Route path='/tracks' element={<Tracks />}/>
+          <Route path='/podcasts' element={<Podcasts />}/>
+          <Route path='/genres' element={<Genres />}/>
         </Routes>
       </ThemeProvider>
     </Box>
