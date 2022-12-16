@@ -5,19 +5,18 @@ import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
+import LoginContextProvider from './contexts/LoginContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render( 
-  <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-    <Suspense fallback={<CircularProgress color="success" />}>
+  <LoginContextProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Suspense>
-  </Box>
+      </LoginContextProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

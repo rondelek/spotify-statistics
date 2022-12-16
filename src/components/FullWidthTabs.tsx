@@ -15,7 +15,10 @@ type TabProps = {
   tab3: React.ReactNode;
 }
 
-export default function FullWidthTabs({tab1, tab2, tab3}: TabProps) {
+export default function FullWidthTabs(props: TabProps) {
+
+  const { tab1, tab2, tab3 } = props;
+
   interface TabPanelProps {
     children?: React.ReactNode;
     dir?: string;
@@ -72,8 +75,8 @@ export default function FullWidthTabs({tab1, tab2, tab3}: TabProps) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Last week" {...a11yProps(0)} />
-          <Tab label="Last year" {...a11yProps(1)} />
+          <Tab label="Last 4 weeks" {...a11yProps(0)} />
+          <Tab label="Last 6 months" {...a11yProps(1)} />
           <Tab label="All time" {...a11yProps(2)} />
         </Tabs>
       </AppBar>

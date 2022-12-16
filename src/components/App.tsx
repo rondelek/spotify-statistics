@@ -4,7 +4,10 @@ import { Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Navbar from './Navbar';
 // import Artists from '../pages/Artists';
-import { lazy } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { lazy, Suspense } from 'react';
+import LoginContextProvider from '../contexts/LoginContext';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Artists = lazy(() => import('../pages/Artists'))
 const Tracks = lazy(() => import('../pages/Tracks'))
@@ -36,18 +39,27 @@ const theme = createTheme({
 });
 
 function App() {
+
+  const client = new QueryClient(); 
+
   return (
     <Box minWidth={'100%'}>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/artists' element={<Artists />}/>
-          <Route path='/tracks' element={<Tracks />}/>
-          <Route path='/podcasts' element={<Podcasts />}/>
-          <Route path='/genres' element={<Genres />}/>
-        </Routes>
-      </ThemeProvider>
+        <QueryClientProvider client={client}>
+          <ThemeProvider theme={theme}>
+            <LoginContextProvider>
+              <Navbar />
+              <Suspense fallback={<CircularProgress color="success" />}>
+                <Routes>
+                  <Route path='/' element={<Home />}/>
+                  <Route path='/artists' element={<Artists />}/>
+                  <Route path='/tracks' element={<Tracks />}/>
+                  <Route path='/podcasts' element={<Podcasts />}/>
+                  <Route path='/genres' element={<Genres />}/>
+                </Routes>
+              </Suspense>
+            </LoginContextProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
     </Box>
   );
 }
