@@ -1,11 +1,11 @@
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { LoginContext } from "./../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ArtistsWeek() {
-  const { accessToken, setAccessToken } = useContext(LoginContext);
+  const { accessToken, setAccessToken, alignment } = useContext(LoginContext);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -23,14 +23,17 @@ export default function ArtistsWeek() {
       .catch(console.error);
   };
 
-  const { data, refetch } = useQuery(["items"], fetchData, {
+  const { data: dataArtistsWeek, refetch } = useQuery(["items"], fetchData, {
     enabled: false,
   });
 
   function logArtists() {
     refetch();
-    console.log(data.items);
   }
+
+  useEffect(() => {
+    logArtists();
+  }, [alignment]);
 
   return (
     <Box
@@ -41,15 +44,14 @@ export default function ArtistsWeek() {
       paddingTop={"3rem"}
       justifyContent={"center"}
     >
-      {data?.items.map((item: any, index: any) => (
-        <Box key={index}>
+      {dataArtistsWeek?.items.map((item: any, index: any) => (
+        <Box key={item.name}>
           <Avatar src={item.images[0].url} sx={{ width: 200, height: 200 }} />
           <div style={{ textAlign: "center", paddingTop: "1rem" }}>
             {item.name}
           </div>
         </Box>
       ))}
-      <button onClick={logArtists}>artists</button>
     </Box>
   );
 }
