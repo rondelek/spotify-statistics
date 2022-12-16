@@ -1,9 +1,26 @@
-import ArtistsWeek from '../components/ArtistsWeek';
-import Top from '../layouts/Top';
+import ArtistsWeek from "../components/ArtistsWeek";
+import ArtistsMonth from "../components/ArtistsMonth";
+import { useContext, useEffect } from "react";
+import { LoginContext } from "./../contexts/LoginContext";
+import TimeTabs from "../components/TimeTabs";
 
 export default function Artists() {
+  const { alignment, setAlignment, accessToken, setAccessToken } =
+    useContext(LoginContext);
 
-    return (
-        <Top name={'artists'} tab1={<ArtistsWeek />} tab2={<ArtistsWeek />} tab3={<ArtistsWeek />}/>
-    )
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      setAccessToken(accessToken);
+    }
+  }, []);
+
+  return (
+    <div className="top-wrapper">
+      <h2>Top artists</h2>
+      <TimeTabs />
+      {alignment === "week" && <ArtistsWeek />}
+      {alignment === "month" && <ArtistsMonth />}
+    </div>
+  );
 }

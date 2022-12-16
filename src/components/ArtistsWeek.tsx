@@ -23,7 +23,7 @@ export default function ArtistsWeek() {
       .catch(console.error);
   };
 
-  const { data, isLoading, isError, refetch } = useQuery(["items"], fetchData, {
+  const { data, refetch } = useQuery(["items"], fetchData, {
     enabled: false,
   });
 
@@ -37,10 +37,10 @@ export default function ArtistsWeek() {
       display={"flex"}
       maxWidth={"100%"}
       flexWrap={"wrap"}
-      gap={"2rem"}
+      gap={"5rem"}
+      paddingTop={"3rem"}
       justifyContent={"center"}
     >
-      <button onClick={logArtists}>artists</button>
       {data?.items.map((item: any, index: any) => (
         <Box key={index}>
           <Avatar src={item.images[0].url} sx={{ width: 200, height: 200 }} />
@@ -49,6 +49,7 @@ export default function ArtistsWeek() {
           </div>
         </Box>
       ))}
+      <button onClick={logArtists}>artists</button>
     </Box>
   );
 }
