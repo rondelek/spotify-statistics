@@ -17,10 +17,33 @@ a {
   color: inherit;
 }
 
-.top-wrapper {
+.top-wrapper--gap {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem 4rem;
   gap: 2rem;
+}
+
+.top-wrapper--no-gap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+.audioPlayer {
+  max-height: 40px;
+  width: 100px;
+  transition: width 1s;
+}
+
+.audioPlayer:hover {
+  width: 350px;
+}
+
+@media screen and (max-width: 810px) {
+  .audioPlayer {
+    display: none;
+  }
 }

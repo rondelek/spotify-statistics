@@ -6,8 +6,7 @@ import TimeTabs from "../components/TimeTabs";
 import ArtistsAll from "../components/ArtistsAll";
 
 export default function Artists() {
-  const { alignment, setAlignment, accessToken, setAccessToken } =
-    useContext(LoginContext);
+  const { alignment, accessToken, setAccessToken } = useContext(LoginContext);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -17,7 +16,7 @@ export default function Artists() {
   }, []);
 
   return (
-    <div className="top-wrapper">
+    <div className="top-wrapper--gap">
       <h2>Top artists</h2>
       <TimeTabs />
       {alignment === "week" && <ArtistsWeek />}

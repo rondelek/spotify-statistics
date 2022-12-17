@@ -9,7 +9,7 @@ import LoginContextProvider from "../contexts/LoginContext";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Artists = lazy(() => import("../pages/Artists"));
-// const Tracks = lazy(() => import('../pages/Tracks'))
+const Tracks = lazy(() => import("../pages/Tracks"));
 // const Genres = lazy(() => import('../pages/Genres'))
 // const Podcasts = lazy(() => import('../pages/Podcasts'))
 
@@ -56,9 +56,9 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/artists" element={<Artists />} />
-                {/* <Route path='/tracks' element={<Tracks />}/>
-                  <Route path='/podcasts' element={<Podcasts />}/>
-                  <Route path='/genres' element={<Genres />}/> */}
+                <Route path="/tracks" element={<Tracks />} />
+                {/* <Route path='/podcasts' element={<Podcasts />}/> */}
+                {/* <Route path='/genres' element={<Genres />}/> */}
               </Routes>
             </Suspense>
           </LoginContextProvider>
