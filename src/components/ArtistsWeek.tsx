@@ -5,7 +5,13 @@ import { LoginContext } from "./../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ArtistsWeek() {
-  const { accessToken, setAccessToken, alignment } = useContext(LoginContext);
+  const {
+    accessToken,
+    setAccessToken,
+    alignment,
+    artistsWeek,
+    setArtistsWeek,
+  } = useContext(LoginContext);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -23,9 +29,22 @@ export default function ArtistsWeek() {
       .catch(console.error);
   };
 
-  const { data: dataArtistsWeek, refetch } = useQuery(["items"], fetchData, {
-    enabled: false,
-  });
+  const { data: dataArtistsWeek, refetch } = useQuery(
+    ["dataArtistsWeek"],
+    fetchData,
+    {
+      enabled: false,
+    }
+  );
+
+  useEffect(() => {
+    if (dataArtistsWeek) {
+      localStorage.setItem(
+        "dataArtistsWeek",
+        JSON.stringify(dataArtistsWeek.items)
+      );
+    }
+  }, [dataArtistsWeek]);
 
   function logArtists() {
     refetch();

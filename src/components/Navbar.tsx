@@ -115,7 +115,7 @@ export default function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Stats
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <a href="/artists">
