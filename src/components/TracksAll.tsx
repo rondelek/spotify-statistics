@@ -8,14 +8,7 @@ import { LoginContext } from "../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
 
 export default function TracksAll() {
-  const { accessToken, setAccessToken, alignment } = useContext(LoginContext);
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setAccessToken(accessToken);
-    }
-  }, []);
+  const { accessToken, alignment } = useContext(LoginContext);
 
   const fetchData = async () => {
     return await fetch(

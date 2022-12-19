@@ -11,7 +11,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 const Artists = lazy(() => import("../pages/Artists"));
 const Tracks = lazy(() => import("../pages/Tracks"));
 const Genres = lazy(() => import("../pages/Genres"));
-// const Podcasts = lazy(() => import('../pages/Podcasts'))
 
 const theme = createTheme({
   palette: {
@@ -58,7 +57,6 @@ function App() {
                 <Route path="/artists" element={<Artists />} />
                 <Route path="/tracks" element={<Tracks />} />
                 <Route path="/genres" element={<Genres />} />
-                {/* <Route path='/podcasts' element={<Podcasts />}/> */}
               </Routes>
             </Suspense>
           </LoginContextProvider>

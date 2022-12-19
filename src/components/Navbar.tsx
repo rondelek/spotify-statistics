@@ -160,20 +160,6 @@ export default function ResponsiveAppBar() {
                 Genres
               </Button>
             </a>
-            <a href="/podcasts">
-              <Button
-                key={"podcasts"}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "black",
-                  display: "block",
-                  padding: "0 2rem",
-                }}
-              >
-                Podcasts
-              </Button>
-            </a>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

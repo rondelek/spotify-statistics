@@ -1,18 +1,11 @@
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ArtistsAll() {
-  const { accessToken, setAccessToken, alignment } = useContext(LoginContext);
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setAccessToken(accessToken);
-    }
-  }, []);
+  const { accessToken, alignment } = useContext(LoginContext);
 
   const fetchData = async () => {
     return await fetch(

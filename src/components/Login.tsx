@@ -26,21 +26,10 @@ export default function Login() {
   }
 
   useEffect(() => {
-    console.log("access", accessToken);
-  }, [accessToken]);
-
-  useEffect(() => {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
     }
   }, [accessToken]);
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setAccessToken(accessToken);
-    }
-  }, []);
 
   return (
     <div>

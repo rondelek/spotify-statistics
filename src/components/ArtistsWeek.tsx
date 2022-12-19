@@ -5,20 +5,7 @@ import { LoginContext } from "./../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ArtistsWeek() {
-  const {
-    accessToken,
-    setAccessToken,
-    alignment,
-    artistsWeek,
-    setArtistsWeek,
-  } = useContext(LoginContext);
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setAccessToken(accessToken);
-    }
-  }, []);
+  const { accessToken, alignment } = useContext(LoginContext);
 
   const fetchData = async () => {
     return await fetch(
