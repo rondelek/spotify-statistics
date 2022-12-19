@@ -3,37 +3,24 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
-import { useContext, useEffect } from "react";
-import { LoginContext } from "../contexts/LoginContext";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 export default function TracksMonth() {
-  const { accessToken, alignment } = useContext(LoginContext);
-
-  const fetchData = async () => {
-    return await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    )
-      .then((response) => response.json())
-      .catch(console.error);
-  };
-
-  const { data: dataTracksMonth, refetch } = useQuery(["items"], fetchData, {
-    enabled: false,
-  });
-
-  function logTracks() {
-    refetch();
-  }
+  const [dataTracksMonth, setDataTracksMonth] = useState<any>();
+  const [testTracksMonth, setTestTracksMonth] = useState<any>();
 
   useEffect(() => {
-    logTracks();
-  }, [alignment]);
+    const dataTracks: any = localStorage.getItem("dataTracksMonth");
+    setTestTracksMonth(JSON.parse(dataTracks));
+  }, []);
+
+  useEffect(() => {
+    setDataTracksMonth(testTracksMonth);
+  }, [testTracksMonth]);
 
   return (
     <>
-      {dataTracksMonth?.items.map((item: any, index: number) => (
+      {dataTracksMonth?.map((item: any, index: number) => (
         <ListItem
           secondaryAction={
             <>

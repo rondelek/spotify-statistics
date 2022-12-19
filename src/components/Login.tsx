@@ -32,7 +32,7 @@ export default function Login() {
     }
   }, [accessToken]);
 
-  const fetchData = async () => {
+  const fetchArtistsWeek = async () => {
     return await fetch(
       "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term",
       { headers: { Authorization: `Bearer ${accessToken}` } }
@@ -41,9 +41,94 @@ export default function Login() {
       .catch(console.error);
   };
 
-  const { data: dataArtistsWeek, refetch } = useQuery(
+  const fetchArtistsMonth = async () => {
+    return await fetch(
+      "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    )
+      .then((response) => response.json())
+      .catch(console.error);
+  };
+
+  const fetchArtistsAll = async () => {
+    return await fetch(
+      "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    )
+      .then((response) => response.json())
+      .catch(console.error);
+  };
+
+  const fetchTracksWeek = async () => {
+    return await fetch(
+      "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    )
+      .then((response) => response.json())
+      .catch(console.error);
+  };
+
+  const fetchTracksMonth = async () => {
+    return await fetch(
+      "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    )
+      .then((response) => response.json())
+      .catch(console.error);
+  };
+
+  const fetchTracksAll = async () => {
+    return await fetch(
+      "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    )
+      .then((response) => response.json())
+      .catch(console.error);
+  };
+
+  const { data: dataArtistsWeek, refetch: refetchArtistsWeek } = useQuery(
     ["dataArtistsWeek"],
-    fetchData,
+    fetchArtistsWeek,
+    {
+      enabled: false,
+    }
+  );
+
+  const { data: dataArtistsMonth, refetch: refetchArtistsMonth } = useQuery(
+    ["dataArtistsMonth"],
+    fetchArtistsMonth,
+    {
+      enabled: false,
+    }
+  );
+
+  const { data: dataArtistsAll, refetch: refetchArtistsAll } = useQuery(
+    ["dataArtistsAll"],
+    fetchArtistsAll,
+    {
+      enabled: false,
+    }
+  );
+
+  const { data: dataTracksWeek, refetch: refetchTracksWeek } = useQuery(
+    ["dataTracksWeek"],
+    fetchTracksWeek,
+    {
+      enabled: false,
+    }
+  );
+
+  const { data: dataTracksMonth, refetch: refetchTracksMonth } = useQuery(
+    ["dataTracksMonth"],
+    fetchTracksMonth,
+    {
+      enabled: false,
+    }
+  );
+
+  const { data: dataTracksAll, refetch: refetchTracksAll } = useQuery(
+    ["dataTracksAll"],
+    fetchTracksAll,
     {
       enabled: false,
     }
@@ -58,8 +143,58 @@ export default function Login() {
     }
   }, [dataArtistsWeek]);
 
+  useEffect(() => {
+    if (dataArtistsMonth) {
+      localStorage.setItem(
+        "dataArtistsMonth",
+        JSON.stringify(dataArtistsMonth.items)
+      );
+    }
+  }, [dataArtistsMonth]);
+
+  useEffect(() => {
+    if (dataArtistsAll) {
+      localStorage.setItem(
+        "dataArtistsAll",
+        JSON.stringify(dataArtistsAll.items)
+      );
+    }
+  }, [dataArtistsAll]);
+
+  useEffect(() => {
+    if (dataTracksWeek) {
+      localStorage.setItem(
+        "dataTracksWeek",
+        JSON.stringify(dataTracksWeek.items)
+      );
+    }
+  }, [dataTracksWeek]);
+
+  useEffect(() => {
+    if (dataTracksMonth) {
+      localStorage.setItem(
+        "dataTracksMonth",
+        JSON.stringify(dataTracksMonth.items)
+      );
+    }
+  }, [dataTracksMonth]);
+
+  useEffect(() => {
+    if (dataTracksAll) {
+      localStorage.setItem(
+        "dataTracksAll",
+        JSON.stringify(dataTracksAll.items)
+      );
+    }
+  }, [dataTracksAll]);
+
   function logArtists() {
-    refetch();
+    refetchArtistsWeek();
+    refetchArtistsMonth();
+    refetchArtistsAll();
+    refetchTracksWeek();
+    refetchTracksMonth();
+    refetchTracksAll();
   }
 
   useEffect(() => {

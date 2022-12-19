@@ -1,45 +1,19 @@
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import { useContext, useEffect } from "react";
-import { LoginContext } from "./../contexts/LoginContext";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 export default function ArtistsMonth() {
-  const { accessToken, alignment } = useContext(LoginContext);
-
-  const fetchData = async () => {
-    return await fetch(
-      "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    )
-      .then((response) => response.json())
-      .catch(console.error);
-  };
-
-  const { data: dataArtistsMonth, refetch } = useQuery(
-    ["dataArtistsMonth"],
-    fetchData,
-    {
-      enabled: false,
-    }
-  );
+  const [dataArtistsMonth, setDataArtistsMonth] = useState<any>();
+  const [testArtistsMonth, setTestArtistsMonth] = useState<any>();
 
   useEffect(() => {
-    if (dataArtistsMonth) {
-      localStorage.setItem(
-        "dataArtistsMonth",
-        JSON.stringify(dataArtistsMonth.items)
-      );
-    }
-  }, [dataArtistsMonth]);
-
-  function logArtists() {
-    refetch();
-  }
+    const dataArtists: any = localStorage.getItem("dataArtistsMonth");
+    setTestArtistsMonth(JSON.parse(dataArtists));
+  }, []);
 
   useEffect(() => {
-    logArtists();
-  }, [alignment]);
+    setDataArtistsMonth(testArtistsMonth);
+  }, [testArtistsMonth]);
 
   return (
     <Box
@@ -50,7 +24,7 @@ export default function ArtistsMonth() {
       paddingTop={"3rem"}
       justifyContent={"center"}
     >
-      {dataArtistsMonth?.items.map((item: any, index: any) => (
+      {dataArtistsMonth?.map((item: any, index: any) => (
         <Box key={item.name}>
           <Avatar src={item.images[0].url} sx={{ width: 200, height: 200 }} />
           <div style={{ textAlign: "center", paddingTop: "1rem" }}>
@@ -58,7 +32,6 @@ export default function ArtistsMonth() {
           </div>
         </Box>
       ))}
-      <button onClick={logArtists}>artists</button>
     </Box>
   );
 }
