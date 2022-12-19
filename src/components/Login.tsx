@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { LoginContext } from "./../contexts/LoginContext";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Login() {
   const { accessToken, setAccessToken } = useContext(LoginContext);
@@ -29,6 +30,40 @@ export default function Login() {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
     }
+  }, [accessToken]);
+
+  const fetchData = async () => {
+    return await fetch(
+      "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    )
+      .then((response) => response.json())
+      .catch(console.error);
+  };
+
+  const { data: dataArtistsWeek, refetch } = useQuery(
+    ["dataArtistsWeek"],
+    fetchData,
+    {
+      enabled: false,
+    }
+  );
+
+  useEffect(() => {
+    if (dataArtistsWeek) {
+      localStorage.setItem(
+        "dataArtistsWeek",
+        JSON.stringify(dataArtistsWeek.items)
+      );
+    }
+  }, [dataArtistsWeek]);
+
+  function logArtists() {
+    refetch();
+  }
+
+  useEffect(() => {
+    logArtists();
   }, [accessToken]);
 
   return (
