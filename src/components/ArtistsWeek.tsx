@@ -24,7 +24,7 @@ export default function ArtistsWeek() {
       paddingTop={"3rem"}
       justifyContent={"center"}
     >
-      {dataArtistsWeek?.map((item: any, index: any) => (
+      {dataArtistsWeek?.map((item: any, index: number) => (
         <Box key={item.name}>
           <Avatar src={item.images[0].url} sx={{ width: 200, height: 200 }} />
           <div style={{ textAlign: "center", paddingTop: "1rem" }}>

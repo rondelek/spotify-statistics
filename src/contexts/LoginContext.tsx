@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 type IContextProps = {
   accessToken: string | any;
-  setAccessToken: (accessToken: string) => void;
+  setAccessToken: (accessToken: string | any) => void;
   alignment: string;
   setAlignment: (alignment: string) => void;
   artistsWeek: any;

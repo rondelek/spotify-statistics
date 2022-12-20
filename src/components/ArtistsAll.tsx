@@ -24,7 +24,7 @@ export default function ArtistsAll() {
       paddingTop={"3rem"}
       justifyContent={"center"}
     >
-      {dataArtistsAll?.map((item: any, index: any) => (
+      {dataArtistsAll?.map((item: any, index: number) => (
         <Box key={item.name}>
           <Avatar src={item.images[0].url} sx={{ width: 200, height: 200 }} />
           <div style={{ textAlign: "center", paddingTop: "1rem" }}>

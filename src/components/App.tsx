@@ -33,9 +33,16 @@ const theme = createTheme({
     MuiToggleButton: {
       styleOverrides: {
         root: {
-          border: "none",
-          padding: ".5rem 1rem",
-          margin: "2rem",
+          borderTop: "none",
+          borderLeft: "none",
+          borderRight: "none",
+          borderRadius: "0",
+          "&.Mui-selected": {
+            borderBottom: "1px solid transparent",
+            borderTop: "rgba(0, 0, 0, 0.12)",
+            borderLeft: "rgba(0, 0, 0, 0.12)",
+            borderRight: "rgba(0, 0, 0, 0.12)",
+          },
         },
       },
     },

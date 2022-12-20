@@ -13,7 +13,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 
-const pages = ["Artists", "Tracks", "Genres", "Podcasts"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function ResponsiveAppBar() {
@@ -43,24 +42,30 @@ export default function ResponsiveAppBar() {
     <AppBar position="sticky" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <GraphicEqIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Spotify Stats
-          </Typography>
+          <a href="/">
+            <GraphicEqIcon
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            />
+          </a>
+          <a href="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              Spotify Stats
+            </Typography>
+          </a>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -91,11 +96,21 @@ export default function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              <a href="/artists">
+                <MenuItem key="artists" onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Artists</Typography>
                 </MenuItem>
-              ))}
+              </a>
+              <a href="/tracks">
+                <MenuItem key="tracks" onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Tracks</Typography>
+                </MenuItem>
+              </a>
+              <a href="/genres">
+                <MenuItem key="genres" onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Genres</Typography>
+                </MenuItem>
+              </a>
             </Menu>
           </Box>
           <GraphicEqIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -115,8 +130,9 @@ export default function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Stats
+            <a href="/">Stats</a>
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <a href="/artists">
               <Button
@@ -163,7 +179,7 @@ export default function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Open profile">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>

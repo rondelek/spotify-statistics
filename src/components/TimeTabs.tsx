@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { useState, useContext, lazy, Suspense } from "react";
+import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 
 export default function TimeTabs() {
@@ -20,19 +20,23 @@ export default function TimeTabs() {
         exclusive
         onChange={handleChange}
         aria-label="Platform"
-        style={{
-          display: "flex",
-          outline: "none",
-          border: "none",
-        }}
       >
-        <ToggleButton value="week">
+        <ToggleButton
+          value="week"
+          sx={{ padding: { sm: "1rem 4rem", md: "1rem 5rem" } }}
+        >
           <Typography>last 4 weeks</Typography>
         </ToggleButton>
-        <ToggleButton value="month">
+        <ToggleButton
+          value="month"
+          sx={{ padding: { sm: "1rem 4rem", md: "1rem 5rem" } }}
+        >
           <Typography>last 6 months</Typography>
         </ToggleButton>
-        <ToggleButton value="all">
+        <ToggleButton
+          value="all"
+          sx={{ padding: { sm: "1rem 4rem", md: "1rem 5rem" } }}
+        >
           <Typography>all time</Typography>
         </ToggleButton>
       </ToggleButtonGroup>

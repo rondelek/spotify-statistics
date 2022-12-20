@@ -39,7 +39,7 @@ a {
 }
 
 .audioPlayer:hover {
-  width: 350px;
+  width: 250px;
 }
 
 @media screen and (max-width: 810px) {

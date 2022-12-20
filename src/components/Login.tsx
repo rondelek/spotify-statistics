@@ -1,8 +1,10 @@
 import { useContext, useEffect } from "react";
 import { LoginContext } from "./../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "@mui/material";
+import { Image } from "@mui/icons-material";
 
-export default function Login() {
+export default function Login(props: any) {
   const { accessToken, setAccessToken } = useContext(LoginContext);
 
   function getAccessToken() {
@@ -24,6 +26,7 @@ export default function Login() {
       const redirect = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public%20user-top-read&redirect_uri=${redirectUri}`;
       window.location.href = redirect;
     }
+    props.closeAlert(false);
   }
 
   useEffect(() => {
@@ -135,60 +138,72 @@ export default function Login() {
   );
 
   useEffect(() => {
-    if (dataArtistsWeek) {
+    if (dataArtistsWeek !== undefined) {
       localStorage.setItem(
         "dataArtistsWeek",
         JSON.stringify(dataArtistsWeek.items)
       );
+    } else {
+      props.closeAlert(true);
     }
   }, [dataArtistsWeek]);
 
   useEffect(() => {
-    if (dataArtistsMonth) {
+    if (dataArtistsMonth !== undefined) {
       localStorage.setItem(
         "dataArtistsMonth",
         JSON.stringify(dataArtistsMonth.items)
       );
+    } else {
+      props.closeAlert(true);
     }
   }, [dataArtistsMonth]);
 
   useEffect(() => {
-    if (dataArtistsAll) {
+    if (dataArtistsAll !== undefined) {
       localStorage.setItem(
         "dataArtistsAll",
         JSON.stringify(dataArtistsAll.items)
       );
+    } else {
+      props.closeAlert(true);
     }
   }, [dataArtistsAll]);
 
   useEffect(() => {
-    if (dataTracksWeek) {
+    if (dataTracksWeek !== undefined) {
       localStorage.setItem(
         "dataTracksWeek",
         JSON.stringify(dataTracksWeek.items)
       );
+    } else {
+      props.closeAlert(true);
     }
   }, [dataTracksWeek]);
 
   useEffect(() => {
-    if (dataTracksMonth) {
+    if (dataTracksMonth !== undefined) {
       localStorage.setItem(
         "dataTracksMonth",
         JSON.stringify(dataTracksMonth.items)
       );
+    } else {
+      props.closeAlert(true);
     }
   }, [dataTracksMonth]);
 
   useEffect(() => {
-    if (dataTracksAll) {
+    if (dataTracksAll !== undefined) {
       localStorage.setItem(
         "dataTracksAll",
         JSON.stringify(dataTracksAll.items)
       );
+    } else {
+      props.closeAlert(true);
     }
   }, [dataTracksAll]);
 
-  function logArtists() {
+  function fetchData() {
     refetchArtistsWeek();
     refetchArtistsMonth();
     refetchArtistsAll();
@@ -198,12 +213,14 @@ export default function Login() {
   }
 
   useEffect(() => {
-    logArtists();
+    fetchData();
   }, [accessToken]);
 
   return (
     <div>
-      <button onClick={getAccessToken}>login</button>
+      <Button color="secondary" onClick={getAccessToken}>
+        Log in to Spotify
+      </Button>
     </div>
   );
 }

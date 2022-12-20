@@ -6,14 +6,7 @@ import TimeTabs from "../components/TimeTabs";
 import ArtistsAll from "../components/ArtistsAll";
 
 export default function Artists() {
-  const { alignment, accessToken, setAccessToken } = useContext(LoginContext);
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setAccessToken(accessToken);
-    }
-  }, []);
+  const { alignment } = useContext(LoginContext);
 
   return (
     <div className="top-wrapper--gap">

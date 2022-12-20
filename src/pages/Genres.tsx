@@ -13,7 +13,13 @@ export default function Genres() {
     <div className="top-wrapper--gap">
       <h2>Top genres</h2>
       <TimeTabs />
-      <Box width={"70%"} display={"flex"} justifyContent={"center"}>
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        sx={{
+          minWidth: { xs: "247px", sm: "550px", md: "774px", lg: "790px" },
+        }}
+      >
         {alignment === "week" && <GenresWeek />}
         {alignment === "month" && <GenresMonth />}
         {alignment === "all" && <GenresAll />}
