@@ -7,16 +7,12 @@ import { useEffect, useState } from "react";
 
 export default function TracksAll() {
   const [dataTracksAll, setDataTracksAll] = useState<any>();
-  const [testTracksAll, setTestTracksAll] = useState<any>();
 
   useEffect(() => {
     const dataTracks: any = localStorage.getItem("dataTracksAll");
-    setTestTracksAll(JSON.parse(dataTracks));
+    setDataTracksAll(JSON.parse(dataTracks));
   }, []);
 
-  useEffect(() => {
-    setDataTracksAll(testTracksAll);
-  }, [testTracksAll]);
   return (
     <>
       {dataTracksAll?.map((item: any, index: number) => (

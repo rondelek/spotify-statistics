@@ -4,16 +4,11 @@ import { useEffect, useState } from "react";
 
 export default function ArtistsAll() {
   const [dataArtistsAll, setDataArtistsAll] = useState<any>();
-  const [testArtistsAll, setTestArtistsAll] = useState<any>();
 
   useEffect(() => {
     const dataArtists: any = localStorage.getItem("dataArtistsAll");
-    setTestArtistsAll(JSON.parse(dataArtists));
+    setDataArtistsAll(JSON.parse(dataArtists));
   }, []);
-
-  useEffect(() => {
-    setDataArtistsAll(testArtistsAll);
-  }, [testArtistsAll]);
 
   return (
     <Box

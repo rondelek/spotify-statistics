@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { LoginContext } from "./../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@mui/material";
-import { Image } from "@mui/icons-material";
 
 export default function Login(props: any) {
   const { accessToken, setAccessToken } = useContext(LoginContext);

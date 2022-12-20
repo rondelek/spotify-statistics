@@ -7,16 +7,11 @@ import { useEffect, useState } from "react";
 
 export default function TracksMonth() {
   const [dataTracksMonth, setDataTracksMonth] = useState<any>();
-  const [testTracksMonth, setTestTracksMonth] = useState<any>();
 
   useEffect(() => {
     const dataTracks: any = localStorage.getItem("dataTracksMonth");
-    setTestTracksMonth(JSON.parse(dataTracks));
+    setDataTracksMonth(JSON.parse(dataTracks));
   }, []);
-
-  useEffect(() => {
-    setDataTracksMonth(testTracksMonth);
-  }, [testTracksMonth]);
 
   return (
     <>

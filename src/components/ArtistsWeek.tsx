@@ -4,16 +4,11 @@ import { useEffect, useState } from "react";
 
 export default function ArtistsWeek() {
   const [dataArtistsWeek, setDataArtistsWeek] = useState<any>();
-  const [testArtistsWeek, setTestArtistsWeek] = useState<any>();
 
   useEffect(() => {
     const dataArtists: any = localStorage.getItem("dataArtistsWeek");
-    setTestArtistsWeek(JSON.parse(dataArtists));
+    setDataArtistsWeek(JSON.parse(dataArtists));
   }, []);
-
-  useEffect(() => {
-    setDataArtistsWeek(testArtistsWeek);
-  }, [testArtistsWeek]);
 
   return (
     <Box

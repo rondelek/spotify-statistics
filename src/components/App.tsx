@@ -46,6 +46,17 @@ const theme = createTheme({
         },
       },
     },
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          cursor: "pointer",
+          "&:hover": {
+            scale: "1.03",
+            transition: "scale .2s ease-in-out",
+          },
+        },
+      },
+    },
   },
 });
 
