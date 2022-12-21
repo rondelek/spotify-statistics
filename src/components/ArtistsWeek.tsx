@@ -9,7 +9,7 @@ export default function ArtistsWeek() {
     const dataArtists: any = localStorage.getItem("dataArtistsWeek");
     setDataArtistsWeek(JSON.parse(dataArtists));
   }, []);
-
+  console.log(dataArtistsWeek);
   return (
     <Box
       display={"flex"}

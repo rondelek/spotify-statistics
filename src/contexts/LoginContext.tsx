@@ -7,6 +7,10 @@ type IContextProps = {
   setAlignment: (alignment: string) => void;
   headers: any;
   setHeaders: (alignment: any) => void;
+  dataArtists: any;
+  setDataArtists: (dataArtists: any) => void;
+  hasData: boolean;
+  setHasData: (hasData: boolean) => void;
 };
 
 export const LoginContext = createContext<IContextProps>({} as IContextProps);
@@ -15,6 +19,8 @@ export default function LoginContextProvider(props: any) {
   const [alignment, setAlignment] = useState("week");
   const [accessToken, setAccessToken] = useState<string>();
   const [headers, setHeaders] = useState<any>();
+  const [dataArtists, setDataArtists] = useState<any>();
+  const [hasData, setHasData] = useState(false);
 
   return (
     <LoginContext.Provider
@@ -25,6 +31,10 @@ export default function LoginContextProvider(props: any) {
         setAlignment,
         headers,
         setHeaders,
+        dataArtists,
+        setDataArtists,
+        hasData,
+        setHasData,
       }}
     >
       {props.children}

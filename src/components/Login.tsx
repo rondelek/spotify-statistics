@@ -4,8 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@mui/material";
 
 export default function Login(props: any) {
-  const { accessToken, setAccessToken } = useContext(LoginContext);
-  let headers: HeadersInit | undefined = undefined;
+  const {
+    accessToken,
+    setAccessToken,
+    dataArtists,
+    setDataArtists,
+    hasData,
+    setHasData,
+  } = useContext(LoginContext);
+  let headers: any = "";
 
   function getAccessToken() {
     const clientId = "6f34cde57e614a869c1ecbf65754a090";
@@ -33,7 +40,6 @@ export default function Login(props: any) {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
       headers = { Authorization: `Bearer ${accessToken}` };
-      alert(headers);
     }
   }, [accessToken]);
 
@@ -140,7 +146,7 @@ export default function Login(props: any) {
   );
 
   useEffect(() => {
-    if (dataArtistsWeek !== undefined) {
+    if (dataArtistsWeek !== undefined && dataArtistsWeek !== null) {
       localStorage.setItem(
         "dataArtistsWeek",
         JSON.stringify(dataArtistsWeek.items)
@@ -152,7 +158,7 @@ export default function Login(props: any) {
   }, [dataArtistsWeek]);
 
   useEffect(() => {
-    if (dataArtistsMonth !== undefined) {
+    if (dataArtistsMonth !== undefined && dataArtistsMonth !== null) {
       localStorage.setItem(
         "dataArtistsMonth",
         JSON.stringify(dataArtistsMonth.items)
@@ -163,7 +169,7 @@ export default function Login(props: any) {
   }, [dataArtistsMonth]);
 
   useEffect(() => {
-    if (dataArtistsAll !== undefined) {
+    if (dataArtistsAll !== undefined && dataArtistsAll !== null) {
       localStorage.setItem(
         "dataArtistsAll",
         JSON.stringify(dataArtistsAll.items)
@@ -174,7 +180,7 @@ export default function Login(props: any) {
   }, [dataArtistsAll]);
 
   useEffect(() => {
-    if (dataTracksWeek !== undefined) {
+    if (dataTracksWeek !== undefined && dataTracksWeek !== null) {
       localStorage.setItem(
         "dataTracksWeek",
         JSON.stringify(dataTracksWeek.items)
@@ -185,7 +191,7 @@ export default function Login(props: any) {
   }, [dataTracksWeek]);
 
   useEffect(() => {
-    if (dataTracksMonth !== undefined) {
+    if (dataTracksMonth !== undefined && dataTracksMonth !== null) {
       localStorage.setItem(
         "dataTracksMonth",
         JSON.stringify(dataTracksMonth.items)
@@ -196,7 +202,8 @@ export default function Login(props: any) {
   }, [dataTracksMonth]);
 
   useEffect(() => {
-    if (dataTracksAll !== undefined) {
+    if (dataTracksAll !== undefined && dataTracksAll !== null) {
+      setHasData(true);
       localStorage.setItem(
         "dataTracksAll",
         JSON.stringify(dataTracksAll.items)
@@ -219,11 +226,15 @@ export default function Login(props: any) {
     fetchData();
   }, [accessToken]);
 
+  useEffect(() => {
+    console.log("data:", dataTracksAll);
+  }, []);
   return (
     <div>
       <Button color="secondary" onClick={getAccessToken}>
         Log in to Spotify
       </Button>
+      {/* <button onClick={tracks}>tracks</button> */}
     </div>
   );
 }
