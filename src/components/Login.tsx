@@ -16,7 +16,7 @@ export default function Login(props: any) {
 
   function getAccessToken() {
     const clientId = "6f34cde57e614a869c1ecbf65754a090";
-    const redirectUri = "http://localhost:3000/";
+    const redirectUri = "https://spotify-statistics.vercel.app/";
     if (accessToken) {
       setAccessToken(accessToken);
     }
