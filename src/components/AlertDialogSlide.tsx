@@ -21,10 +21,6 @@ const Transition = React.forwardRef(function Transition(
 export default function AlertDialogSlide() {
   const [open, setOpen] = React.useState<boolean>(true);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   return (
     <div>
       <Dialog

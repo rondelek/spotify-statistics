@@ -3,8 +3,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
-import { useContext, useEffect, useState } from "react";
-import { LoginContext } from "../contexts/LoginContext";
+import { useEffect, useState } from "react";
 
 export default function TracksWeek() {
   const [dataTracksWeek, setDataTracksWeek] = useState<any>();

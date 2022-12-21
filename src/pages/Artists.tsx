@@ -1,6 +1,6 @@
 import ArtistsWeek from "../components/ArtistsWeek";
 import ArtistsMonth from "../components/ArtistsMonth";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { LoginContext } from "./../contexts/LoginContext";
 import TimeTabs from "../components/TimeTabs";
 import ArtistsAll from "../components/ArtistsAll";

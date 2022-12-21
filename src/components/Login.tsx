@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 
 export default function Login(props: any) {
   const { accessToken, setAccessToken } = useContext(LoginContext);
+  let headers: HeadersInit | undefined = undefined;
 
   function getAccessToken() {
     const clientId = "6f34cde57e614a869c1ecbf65754a090";
@@ -31,13 +32,15 @@ export default function Login(props: any) {
   useEffect(() => {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
+      headers = { Authorization: `Bearer ${accessToken}` };
+      alert(headers);
     }
   }, [accessToken]);
 
   const fetchArtistsWeek = async () => {
     return await fetch(
       "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: headers }
     )
       .then((response) => response.json())
       .catch(console.error);
@@ -46,7 +49,7 @@ export default function Login(props: any) {
   const fetchArtistsMonth = async () => {
     return await fetch(
       "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: headers }
     )
       .then((response) => response.json())
       .catch(console.error);
@@ -55,7 +58,7 @@ export default function Login(props: any) {
   const fetchArtistsAll = async () => {
     return await fetch(
       "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: headers }
     )
       .then((response) => response.json())
       .catch(console.error);
@@ -64,7 +67,7 @@ export default function Login(props: any) {
   const fetchTracksWeek = async () => {
     return await fetch(
       "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: headers }
     )
       .then((response) => response.json())
       .catch(console.error);
@@ -73,7 +76,7 @@ export default function Login(props: any) {
   const fetchTracksMonth = async () => {
     return await fetch(
       "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: headers }
     )
       .then((response) => response.json())
       .catch(console.error);
@@ -82,7 +85,7 @@ export default function Login(props: any) {
   const fetchTracksAll = async () => {
     return await fetch(
       "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: headers }
     )
       .then((response) => response.json())
       .catch(console.error);
@@ -142,6 +145,7 @@ export default function Login(props: any) {
         "dataArtistsWeek",
         JSON.stringify(dataArtistsWeek.items)
       );
+      console.log(dataArtistsWeek);
     } else {
       props.closeAlert(true);
     }

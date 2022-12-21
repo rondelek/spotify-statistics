@@ -1,5 +1,5 @@
 import GenresWeek from "../components/GenresWeek";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { LoginContext } from "./../contexts/LoginContext";
 import TimeTabs from "../components/TimeTabs";
 import { Box } from "@mui/material";

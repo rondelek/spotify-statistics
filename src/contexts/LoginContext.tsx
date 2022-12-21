@@ -5,8 +5,8 @@ type IContextProps = {
   setAccessToken: (accessToken: string | any) => void;
   alignment: string;
   setAlignment: (alignment: string) => void;
-  artistsWeek: any;
-  setArtistsWeek: (artistsWeek: any) => any;
+  headers: any;
+  setHeaders: (alignment: any) => void;
 };
 
 export const LoginContext = createContext<IContextProps>({} as IContextProps);
@@ -14,7 +14,7 @@ export const LoginContext = createContext<IContextProps>({} as IContextProps);
 export default function LoginContextProvider(props: any) {
   const [alignment, setAlignment] = useState("week");
   const [accessToken, setAccessToken] = useState<string>();
-  const [artistsWeek, setArtistsWeek] = useState();
+  const [headers, setHeaders] = useState<any>();
 
   return (
     <LoginContext.Provider
@@ -23,8 +23,8 @@ export default function LoginContextProvider(props: any) {
         setAccessToken,
         alignment,
         setAlignment,
-        artistsWeek,
-        setArtistsWeek,
+        headers,
+        setHeaders,
       }}
     >
       {props.children}

@@ -1,18 +1,8 @@
 import Box from "@mui/material/Box";
 import AlertDialogSlide from "../components/AlertDialogSlide";
-import Login from "../components/Login";
 import MenuBox from "../components/MenuBox";
-import { LoginContext } from "../contexts/LoginContext";
-import { useContext, useEffect } from "react";
 
 export default function Home() {
-  const { accessToken, setAccessToken } = useContext(LoginContext);
-  useEffect(() => {
-    if (accessToken) {
-      setAccessToken(localStorage.getItem("accessToken"));
-    }
-  }, []);
-
   return (
     <Box
       display={"flex"}
