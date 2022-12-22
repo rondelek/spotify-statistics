@@ -3,38 +3,42 @@ import { createContext, useState } from "react";
 type IContextProps = {
   accessToken: string | any;
   setAccessToken: (accessToken: string | any) => void;
-  alignment: string;
-  setAlignment: (alignment: string) => void;
-  headers: any;
-  setHeaders: (alignment: any) => void;
-  dataArtists: any;
-  setDataArtists: (dataArtists: any) => void;
-  hasData: boolean;
-  setHasData: (hasData: boolean) => void;
+  getToken: any;
 };
 
 export const LoginContext = createContext<IContextProps>({} as IContextProps);
 
 export default function LoginContextProvider(props: any) {
-  const [alignment, setAlignment] = useState("week");
   const [accessToken, setAccessToken] = useState<string>();
-  const [headers, setHeaders] = useState<any>();
-  const [dataArtists, setDataArtists] = useState<any>();
-  const [hasData, setHasData] = useState(false);
+
+  const clientId = "6f34cde57e614a869c1ecbf65754a090";
+  const redirectUri = "http://localhost:3000/";
+
+  function getToken() {
+    if (accessToken) {
+      setAccessToken(accessToken);
+    }
+
+    const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
+    const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
+
+    if (accessTokenMatch && expiresInMatch) {
+      setAccessToken(accessTokenMatch[1]);
+      let expiresIn = expiresInMatch[1];
+      window.setTimeout(() => setAccessToken(""), Number(expiresIn) * 1000);
+      window.history.pushState("Access Token", "/");
+    } else {
+      const redirect = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public%20user-top-read&redirect_uri=${redirectUri}`;
+      window.location.href = redirect;
+    }
+  }
 
   return (
     <LoginContext.Provider
       value={{
         accessToken,
         setAccessToken,
-        alignment,
-        setAlignment,
-        headers,
-        setHeaders,
-        dataArtists,
-        setDataArtists,
-        hasData,
-        setHasData,
+        getToken,
       }}
     >
       {props.children}

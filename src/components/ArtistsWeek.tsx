@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
+import Login from "./Login";
 
 export default function ArtistsWeek() {
   const [dataArtistsWeek, setDataArtistsWeek] = useState<any>();
@@ -9,7 +10,11 @@ export default function ArtistsWeek() {
     const dataArtists: any = localStorage.getItem("dataArtistsWeek");
     setDataArtistsWeek(JSON.parse(dataArtists));
   }, []);
-  console.log(dataArtistsWeek);
+
+  if (dataArtistsWeek === null || dataArtistsWeek === undefined) {
+    return <Login />;
+  }
+
   return (
     <Box
       display={"flex"}

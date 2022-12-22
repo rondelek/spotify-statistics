@@ -1,9 +1,7 @@
 import Box from "@mui/material/Box";
 import AlertDialogSlide from "../components/AlertDialogSlide";
 import MenuBox from "../components/MenuBox";
-import { useContext, useEffect, useState } from "react";
-import LoginContextProvider from "../contexts/LoginContext";
-import { LoginContext } from "./../contexts/LoginContext";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [hasData, setHasData] = useState(false);
@@ -12,13 +10,11 @@ export default function Home() {
     const data: any = localStorage.getItem("dataTracksAll");
     if (data !== null && data !== undefined) {
       setHasData(true);
-      //   alert(`has data: ${data}`);
     } else {
       setHasData(false);
-      //   alert("doesn't have data");
     }
   }, []);
-  console.log(hasData);
+
   return (
     <Box
       display={"flex"}

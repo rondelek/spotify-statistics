@@ -1,25 +1,21 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
+import { forwardRef, Ref, useState, ReactElement } from "react";
+import Login from "./Login";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import Login from "./Login";
 
-const Transition = React.forwardRef(function Transition(
+const Transition = forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement<any, any>;
+    children: ReactElement<any, any>;
   },
-  ref: React.Ref<unknown>
+  ref: Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function AlertDialogSlide() {
-  const [open, setOpen] = React.useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(true);
 
   return (
     <div>
@@ -31,9 +27,7 @@ export default function AlertDialogSlide() {
         color="secondary"
       >
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            <Login closeAlert={setOpen} />
-          </DialogContentText>
+          <Login closeAlert={setOpen} />
         </DialogContent>
       </Dialog>
     </div>

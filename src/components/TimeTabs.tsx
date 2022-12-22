@@ -3,10 +3,10 @@ import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useContext } from "react";
-import { LoginContext } from "../contexts/LoginContext";
+import { AlignmentContext } from "../contexts/AlignmentContext";
 
 export default function TimeTabs() {
-  const { alignment, setAlignment } = useContext(LoginContext);
+  const { alignment, setAlignment } = useContext(AlignmentContext);
 
   const handleChange = (event: any, newAlignment: string) => {
     setAlignment(newAlignment);

@@ -4,6 +4,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
+import Login from "./Login";
 
 export default function TracksWeek() {
   const [dataTracksWeek, setDataTracksWeek] = useState<any>();
@@ -12,6 +13,10 @@ export default function TracksWeek() {
     const dataTracks: any = localStorage.getItem("dataTracksWeek");
     setDataTracksWeek(JSON.parse(dataTracks));
   }, []);
+
+  if (dataTracksWeek === null || dataTracksWeek === undefined) {
+    return <Login />;
+  }
 
   return (
     <>

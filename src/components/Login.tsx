@@ -1,38 +1,14 @@
 import { useContext, useEffect } from "react";
-import { LoginContext } from "./../contexts/LoginContext";
+import { LoginContext } from "../contexts/LoginContext";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@mui/material";
 
 export default function Login(props: any) {
-  const {
-    accessToken,
-    setAccessToken,
-    dataArtists,
-    setDataArtists,
-    hasData,
-    setHasData,
-  } = useContext(LoginContext);
+  const { accessToken, getToken } = useContext(LoginContext);
   let headers: any = "";
 
   function getAccessToken() {
-    const clientId = "6f34cde57e614a869c1ecbf65754a090";
-    const redirectUri = "https://spotify-statistics.vercel.app/";
-    if (accessToken) {
-      setAccessToken(accessToken);
-    }
-
-    const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
-    const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
-
-    if (accessTokenMatch && expiresInMatch) {
-      setAccessToken(accessTokenMatch[1]);
-      let expiresIn = expiresInMatch[1];
-      window.setTimeout(() => setAccessToken(""), Number(expiresIn) * 1000);
-      window.history.pushState("Access Token", "/");
-    } else {
-      const redirect = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public%20user-top-read&redirect_uri=${redirectUri}`;
-      window.location.href = redirect;
-    }
+    getToken();
     props.closeAlert(false);
   }
 
@@ -72,7 +48,7 @@ export default function Login(props: any) {
 
   const fetchTracksWeek = async () => {
     return await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term",
+      "https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=short_term",
       { headers: headers }
     )
       .then((response) => response.json())
@@ -81,7 +57,7 @@ export default function Login(props: any) {
 
   const fetchTracksMonth = async () => {
     return await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term",
+      "https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=medium_term",
       { headers: headers }
     )
       .then((response) => response.json())
@@ -90,7 +66,7 @@ export default function Login(props: any) {
 
   const fetchTracksAll = async () => {
     return await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term",
+      "https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=long_term",
       { headers: headers }
     )
       .then((response) => response.json())
@@ -152,8 +128,6 @@ export default function Login(props: any) {
         JSON.stringify(dataArtistsWeek.items)
       );
       console.log(dataArtistsWeek);
-    } else {
-      props.closeAlert(true);
     }
   }, [dataArtistsWeek]);
 
@@ -163,8 +137,6 @@ export default function Login(props: any) {
         "dataArtistsMonth",
         JSON.stringify(dataArtistsMonth.items)
       );
-    } else {
-      props.closeAlert(true);
     }
   }, [dataArtistsMonth]);
 
@@ -174,8 +146,6 @@ export default function Login(props: any) {
         "dataArtistsAll",
         JSON.stringify(dataArtistsAll.items)
       );
-    } else {
-      props.closeAlert(true);
     }
   }, [dataArtistsAll]);
 
@@ -185,8 +155,6 @@ export default function Login(props: any) {
         "dataTracksWeek",
         JSON.stringify(dataTracksWeek.items)
       );
-    } else {
-      props.closeAlert(true);
     }
   }, [dataTracksWeek]);
 
@@ -196,20 +164,15 @@ export default function Login(props: any) {
         "dataTracksMonth",
         JSON.stringify(dataTracksMonth.items)
       );
-    } else {
-      props.closeAlert(true);
     }
   }, [dataTracksMonth]);
 
   useEffect(() => {
     if (dataTracksAll !== undefined && dataTracksAll !== null) {
-      setHasData(true);
       localStorage.setItem(
         "dataTracksAll",
         JSON.stringify(dataTracksAll.items)
       );
-    } else {
-      props.closeAlert(true);
     }
   }, [dataTracksAll]);
 
@@ -226,15 +189,11 @@ export default function Login(props: any) {
     fetchData();
   }, [accessToken]);
 
-  useEffect(() => {
-    console.log("data:", dataTracksAll);
-  }, []);
   return (
     <div>
       <Button color="secondary" onClick={getAccessToken}>
         Log in to Spotify
       </Button>
-      {/* <button onClick={tracks}>tracks</button> */}
     </div>
   );
 }

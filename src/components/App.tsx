@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { lazy, Suspense } from "react";
 import LoginContextProvider from "../contexts/LoginContext";
 import CircularProgress from "@mui/material/CircularProgress";
+import AlignmentContextProvider from "../contexts/AlignmentContext";
 
 const Artists = lazy(() => import("../pages/Artists"));
 const Tracks = lazy(() => import("../pages/Tracks"));
@@ -64,11 +65,11 @@ function App() {
   const client = new QueryClient();
 
   return (
-    <Box minWidth={"100%"}>
-      <QueryClientProvider client={client}>
-        <ThemeProvider theme={theme}>
+    <QueryClientProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <Navbar />
+        <AlignmentContextProvider>
           <LoginContextProvider>
-            <Navbar />
             <Suspense fallback={<CircularProgress color="success" />}>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -78,9 +79,9 @@ function App() {
               </Routes>
             </Suspense>
           </LoginContextProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </Box>
+        </AlignmentContextProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

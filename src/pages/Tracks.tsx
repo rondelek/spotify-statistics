@@ -3,11 +3,11 @@ import TracksMonth from "../components/TracksMonth";
 import TracksAll from "../components/TracksAll";
 import TimeTabs from "../components/TimeTabs";
 import { useContext } from "react";
-import { LoginContext } from "./../contexts/LoginContext";
+import { AlignmentContext } from "../contexts/AlignmentContext";
 import { Box } from "@mui/system";
 
 export default function Tracks() {
-  const { alignment } = useContext(LoginContext);
+  const { alignment } = useContext(AlignmentContext);
 
   return (
     <div className="top-wrapper--no-gap">

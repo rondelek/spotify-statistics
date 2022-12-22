@@ -1,13 +1,13 @@
 import GenresWeek from "../components/GenresWeek";
 import { useContext } from "react";
-import { LoginContext } from "./../contexts/LoginContext";
+import { AlignmentContext } from "../contexts/AlignmentContext";
 import TimeTabs from "../components/TimeTabs";
 import { Box } from "@mui/material";
 import GenresMonth from "../components/GenresMonth";
 import GenresAll from "../components/GenresAll";
 
 export default function Genres() {
-  const { alignment } = useContext(LoginContext);
+  const { alignment } = useContext(AlignmentContext);
 
   return (
     <div className="top-wrapper--gap">
