@@ -51,7 +51,7 @@ export default function GenresWeek() {
     );
   }
   function createGenresArray() {
-    const genres = dataArtistsWeek!.map((item: { [key: string]: [] }) =>
+    dataArtistsWeek!.map((item: { [key: string]: [] }) =>
       item.genres.map((genre) => genresArray.push(genre))
     );
   }

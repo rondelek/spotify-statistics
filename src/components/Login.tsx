@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@mui/material";
 
 export default function Login(props: any) {
-  const { accessToken, getToken } = useContext(LoginContext);
+  const { accessToken, setAccessToken, getToken } = useContext(LoginContext);
   let headers: any = "";
 
   function getAccessToken() {

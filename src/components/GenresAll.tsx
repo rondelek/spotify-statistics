@@ -51,7 +51,7 @@ export default function GenresAll() {
     );
   }
   function createGenresArray() {
-    const genres = dataArtistsAll!.map((item: { [key: string]: [] }) =>
+    dataArtistsAll!.map((item: { [key: string]: [] }) =>
       item.genres.map((genre) => genresArray.push(genre))
     );
   }

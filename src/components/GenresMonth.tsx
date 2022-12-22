@@ -51,7 +51,7 @@ export default function GenresMonth() {
     );
   }
   function createGenresArray() {
-    const genres = dataArtistsMonth!.map((item: { [key: string]: [] }) =>
+    dataArtistsMonth!.map((item: { [key: string]: [] }) =>
       item.genres.map((genre) => genresArray.push(genre))
     );
   }
