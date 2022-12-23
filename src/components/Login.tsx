@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@mui/material";
 
 export default function Login(props: any) {
-  const { accessToken, setAccessToken, getToken } = useContext(LoginContext);
+  const { accessToken, getToken } = useContext(LoginContext);
   let headers: any = "";
 
   function getAccessToken() {
@@ -73,6 +73,12 @@ export default function Login(props: any) {
       .catch(console.error);
   };
 
+  const fetchUser = async () => {
+    return await fetch("https://api.spotify.com/v1/me", { headers: headers })
+      .then((response) => response.json())
+      .catch(console.error);
+  };
+
   const { data: dataArtistsWeek, refetch: refetchArtistsWeek } = useQuery(
     ["dataArtistsWeek"],
     fetchArtistsWeek,
@@ -116,6 +122,14 @@ export default function Login(props: any) {
   const { data: dataTracksAll, refetch: refetchTracksAll } = useQuery(
     ["dataTracksAll"],
     fetchTracksAll,
+    {
+      enabled: false,
+    }
+  );
+
+  const { data: dataUser, refetch: refetchUser } = useQuery(
+    ["dataUser"],
+    fetchUser,
     {
       enabled: false,
     }
@@ -176,6 +190,12 @@ export default function Login(props: any) {
     }
   }, [dataTracksAll]);
 
+  useEffect(() => {
+    if (dataUser !== undefined && dataUser !== null) {
+      localStorage.setItem("dataUser", JSON.stringify(dataUser));
+    }
+  }, [dataUser]);
+
   function fetchData() {
     refetchArtistsWeek();
     refetchArtistsMonth();
@@ -183,6 +203,7 @@ export default function Login(props: any) {
     refetchTracksWeek();
     refetchTracksMonth();
     refetchTracksAll();
+    refetchUser();
   }
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect, MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,19 +12,17 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
 export default function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [dataUserAll, setDataUserAll] = useState<any>();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -41,6 +39,11 @@ export default function ResponsiveAppBar() {
     localStorage.clear();
     window.location.reload();
   };
+
+  useEffect(() => {
+    const dataUser: any = localStorage.getItem("dataUser");
+    setDataUserAll(JSON.parse(dataUser));
+  }, []);
 
   return (
     <AppBar position="sticky" color="primary">
@@ -132,6 +135,7 @@ export default function ResponsiveAppBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              marginRight: "0",
             }}
           >
             <a href="/">Stats</a>
@@ -184,9 +188,23 @@ export default function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open profile">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              <Box
+                onClick={handleOpenUserMenu}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                {dataUserAll?.images[0]?.url ? (
+                  <Avatar alt="Remy Sharp" src={dataUserAll.images[0].url} />
+                ) : (
+                  <PersonOutlineIcon />
+                )}
+                <Typography fontWeight={"bold"} fontSize={"smaller"}>
+                  {dataUserAll?.display_name}
+                </Typography>
+              </Box>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}

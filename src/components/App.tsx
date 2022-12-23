@@ -1,4 +1,3 @@
-import { Box } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";

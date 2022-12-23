@@ -28,7 +28,7 @@ export default function LoginContextProvider(props: any) {
       window.setTimeout(() => setAccessToken(""), Number(expiresIn) * 1000);
       window.history.pushState("Access Token", "/");
     } else {
-      const redirect = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public%20user-top-read&redirect_uri=${redirectUri}`;
+      const redirect = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public%20user-top-read%20ugc-image-upload%20playlist-read-private&redirect_uri=${redirectUri}`;
       window.location.href = redirect;
     }
   }
