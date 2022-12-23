@@ -12,7 +12,7 @@ export default function LoginContextProvider(props: any) {
   const [accessToken, setAccessToken] = useState<string>();
 
   const clientId = "6f34cde57e614a869c1ecbf65754a090";
-  const redirectUri = "http://localhost:3000/";
+  const redirectUri = "https://spotify-statistics.vercel.app/";
 
   function getToken() {
     if (accessToken) {
