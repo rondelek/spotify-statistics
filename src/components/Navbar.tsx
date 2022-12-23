@@ -135,7 +135,6 @@ export default function ResponsiveAppBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-              marginRight: "0",
             }}
           >
             <a href="/">Stats</a>
@@ -201,9 +200,6 @@ export default function ResponsiveAppBar() {
                 ) : (
                   <PersonOutlineIcon />
                 )}
-                <Typography fontWeight={"bold"} fontSize={"smaller"}>
-                  {dataUserAll?.display_name}
-                </Typography>
               </Box>
             </Tooltip>
             <Menu
